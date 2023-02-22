@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Estoque
+          App
         </q-toolbar-title>
 
         <q-btn-dropdown flat color="white" icon="person">
