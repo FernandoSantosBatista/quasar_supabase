@@ -72,22 +72,10 @@ const linksList = [
     routeName: 'me'
   },
   {
-    title: 'Category',
-    caption: '',
-    icon: 'mdi-shape-outline',
-    routeName: 'category'
-  },
-  {
-    title: 'Product',
-    caption: '',
-    icon: 'mdi-archive',
-    routeName: 'product'
-  },
-  {
-    title: 'Config',
+    title: 'Gerenciamento',
     caption: '',
     icon: 'mdi-cog',
-    routeName: 'form-config'
+    routeName: 'PageList'
   }
 ]
 

@@ -16,7 +16,10 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'me', name: 'me', component: () => import('pages/Me.vue') }
+      { path: 'me', name: 'me', component: () => import('pages/Me.vue') },
+      { path: 'list', name: 'PageList', component: () => import('pages/List.vue') },
+      { path: 'formulario/:id?', name: 'formulario', component: () => import('pages/Form.vue') }
+
       // { path: '', component: () => import('pages/Index.vue') }
     ],
     meta: {
