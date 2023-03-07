@@ -2,7 +2,7 @@
   <q-page padding>
     <div class="row">
       <q-table
-        :rows="documents"
+        :rows="categories"
         :columns="columns"
         row-key="name"
         class="col-12"
@@ -23,7 +23,7 @@
       </template>
       </q-table>
       <q-page-sticky position="bottom" :offset="[0, 18]">
-    <q-btn fab icon="add" color="primary" :to="{ name: 'formulario' }" />
+    <q-btn fab icon="add" color="primary" :to="{ name: 'formulario-category' }" />
   </q-page-sticky>
       </div>
       </q-page>
@@ -43,51 +43,51 @@ import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 
 export default defineComponent({
-  name: 'PageList',
+  name: 'category-list',
   setup () {
-    const documents = ref([])
+    const categories = ref([])
     const { list, remove } = useApi()
     const { notifyError, notifySuccess } = useNotify()
     const router = useRouter()
-    const table = 'documents'
+    const table = 'categories'
     const $q = useQuasar()
     const loading = ref(true)
 
-    const handleListDocuments = async () => {
+    const handleListCategories = async () => {
       try {
         loading.value = true
-        documents.value = await list('documents')
+        categories.value = await list('categories')
         loading.value = false
       } catch (error) {
         notifyError(error.message)
       }
     }
-    const handleRemoveProduct = async (documents) => {
+    const handleRemoveProduct = async (categories) => {
       try {
         $q.dialog({
           title: 'Confirm',
-          message: `Deseja realmente exluir ${documents.name} ?`,
+          message: `Deseja realmente exluir ${categories.name} ?`,
           cancel: true,
           persistent: true
         }).onOk(async () => {
-          await remove(table, documents.id)
+          await remove(table, categories.id)
           notifySuccess('Excluido com sucesso')
-          handleListDocuments()
+          handleListCategories()
         })
       } catch (error) {
         notifyError(error.message)
       }
     }
-    const editForm = (documents) => {
-      router.push({ name: 'formulario', params: { id: documents.id } })
+    const editForm = (categories) => {
+      router.push({ name: 'formulario-category', params: { id: categories.id } })
     }
     onMounted(() => {
-      handleListDocuments()
+      handleListCategories()
     })
 
     return {
       columns,
-      documents,
+      categories,
       editForm,
       loading,
       handleRemoveProduct

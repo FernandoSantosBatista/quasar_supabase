@@ -28,7 +28,7 @@
           class="full-width"
           rounded
           flat
-          :to="{ name: 'PageList'}"
+          :to="{ name: 'category-list'}"
         />
 
       </q-form>
@@ -45,14 +45,14 @@ import useNotify from 'src/composables/UseNotify'
 export default defineComponent({
   name: 'PageForm',
   setup () {
-    const table = 'documents'
+    const table = 'categories'
     const { post, getById, update } = useApi()
     const router = useRouter()
     const route = useRoute()
     const { notifyError, notifySuccess } = useNotify()
     const isUpdate = computed(() => route.params.id)
 
-    let documents = {}
+    let categories = {}
     const form = ref({
       name: ''
     })
@@ -72,7 +72,7 @@ export default defineComponent({
           await post(table, form.value)
           notifySuccess('Saved Successfully')
         }
-        router.push({ name: 'PageList' })
+        router.push({ name: 'formulario-product' })
       } catch (error) {
         notifyError(error.message)
       }
@@ -80,8 +80,8 @@ export default defineComponent({
 
     const handleGetCategory = async (id) => {
       try {
-        documents = await getById(table, id)
-        form.value = documents
+        categories = await getById(table, id)
+        form.value = categories
       } catch (error) {
         notifyError(error.message)
       }

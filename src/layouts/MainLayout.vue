@@ -72,11 +72,24 @@ const linksList = [
     routeName: 'me'
   },
   {
-    title: 'Gerenciamento',
+    title: 'Categoria',
+    caption: '',
+    icon: 'mdi-shape-outline',
+    routeName: 'category-list'
+  },
+  {
+    title: 'Produto',
+    caption: '',
+    icon: 'mdi-archive',
+    routeName: 'products-list'
+  },
+  {
+    title: 'Config',
     caption: '',
     icon: 'mdi-cog',
-    routeName: 'PageList'
+    routeName: 'form-config'
   }
+
 ]
 
 import { defineComponent, ref } from 'vue'

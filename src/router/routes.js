@@ -17,8 +17,11 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: 'me', name: 'me', component: () => import('pages/Me.vue') },
-      { path: 'list', name: 'PageList', component: () => import('pages/List.vue') },
-      { path: 'formulario/:id?', name: 'formulario', component: () => import('pages/Form.vue') }
+      { path: 'list/products', name: 'products-list', component: () => import('pages/product/List.vue') },
+      { path: 'formulario/products/:id?', name: 'form-product', component: () => import('pages/product/Form.vue') },
+
+      { path: 'list', name: 'category-list', component: () => import('pages/category/List.vue') },
+      { path: 'formulario/:id?', name: 'formulario-category', component: () => import('pages/category/Form.vue') }
 
       // { path: '', component: () => import('pages/Index.vue') }
     ],
