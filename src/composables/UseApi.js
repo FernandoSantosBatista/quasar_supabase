@@ -84,18 +84,19 @@ export default function useApi () {
         cacheControl: '3600',
         upsert: false
       })
-    const publicUrl = await getUrlPublic(fileName, storage)
+    const publicURL =
+    await getUrlPublic(fileName, storage)
     if (error) throw error
-    return publicUrl
+    return publicURL.publicUrl
   }
 
   const getUrlPublic = async (fileName, storage) => {
-    const { publicURL, error } = supabase
+    const { data, error } = supabase
       .storage
       .from(storage)
       .getPublicUrl(fileName)
     if (error) throw error
-    return publicURL
+    return data
   }
 
   return {

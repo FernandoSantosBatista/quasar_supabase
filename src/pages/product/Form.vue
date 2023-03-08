@@ -3,17 +3,15 @@
     <div class="row justify-center">
       <div class="col-12 text-center">
         <p class="text-h6">
-          Form Product
+          Produto
         </p>
       </div>
       <q-form class="col-md-7 col-xs-12 col-sm-12 q-gutter-y-md" @submit.prevent="handleSubmit">
-
         <q-input
           label="Image"
           stack-label
           v-model="img"
           type="file"
-          accept="image/*"
         />
 
        <q-input
@@ -21,7 +19,6 @@
           v-model="form.name"
           :rules="[val => (val && val.length > 0) || 'Name is required']"
         />
-
         <q-editor
           v-model="form.description"
           min-height="5rem"
@@ -40,7 +37,6 @@
           :rules="[val => !!val || 'Price is required']"
           prefix="R$"
         />
-
         <q-select
           v-model="form.category_id"
           :options="optionsCategory"
@@ -66,7 +62,7 @@
           class="full-width"
           rounded
           flat
-          :to="{ name: 'products-list'}"
+          :to="{ name: 'product'}"
         />
 
       </q-form>
@@ -79,20 +75,19 @@ import { defineComponent, ref, onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import useApi from 'src/composables/UseApi'
 import useNotify from 'src/composables/UseNotify'
-import useAuthUser from 'src/composables/UseAuthUser'
 
 export default defineComponent({
-  name: 'PageFormCategory',
+  name: 'PageForm',
   setup () {
     const table = 'products'
+    const optionsCategory = ref([])
+    const { post, getById, update, list, uploadImg } = useApi()
     const router = useRouter()
     const route = useRoute()
-    const { post, getById, update, listPublic, uploadImg } = useApi()
     const { notifyError, notifySuccess } = useNotify()
-    const { user } = useAuthUser()
     const isUpdate = computed(() => route.params.id)
-    let product = {}
-    const optionsCategory = ref([])
+
+    let products = {}
     const form = ref({
       name: '',
       description: '',
@@ -101,20 +96,24 @@ export default defineComponent({
       category_id: '',
       img_url: ''
     })
+
     const img = ref([])
+
     onMounted(() => {
       handleListCategories()
       if (isUpdate.value) {
         handleGetProduct(isUpdate.value)
       }
     })
+
     const handleListCategories = async () => {
-      optionsCategory.value = await listPublic('categories', user.value.id)
+      optionsCategory.value = await list('categories')
     }
+
     const handleSubmit = async () => {
       try {
         if (img.value.length > 0) {
-          const imgUrl = await uploadImg(img.value[0], 'products')
+          const imgUrl = await uploadImg(img.value[0], 'product')
           form.value.img_url = imgUrl
         }
         if (isUpdate.value) {
@@ -129,14 +128,16 @@ export default defineComponent({
         notifyError(error.message)
       }
     }
+
     const handleGetProduct = async (id) => {
       try {
-        product = await getById(table, id)
-        form.value = product
+        products = await getById(table, id)
+        form.value = products
       } catch (error) {
         notifyError(error.message)
       }
     }
+
     return {
       handleSubmit,
       form,

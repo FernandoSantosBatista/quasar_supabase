@@ -18,7 +18,7 @@ const routes = [
     children: [
       { path: 'me', name: 'me', component: () => import('pages/Me.vue') },
       { path: 'list/products', name: 'products-list', component: () => import('pages/product/List.vue') },
-      { path: 'formulario/products/:id?', name: 'form-product', component: () => import('pages/product/Form.vue') },
+      { path: 'form-product/:id?', name: 'form-product', component: () => import('pages/product/Form.vue') },
 
       { path: 'list', name: 'category-list', component: () => import('pages/category/List.vue') },
       { path: 'formulario/:id?', name: 'formulario-category', component: () => import('pages/category/Form.vue') }
