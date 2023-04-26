@@ -121,8 +121,7 @@ export default defineComponent({
         } else {
           await post(table, form.value)
           notifySuccess('Saved Successfully')
-        }
-       
+        }    
       } catch (error) {
         notifyError(error.message)
       }
