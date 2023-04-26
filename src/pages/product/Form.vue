@@ -82,7 +82,6 @@ export default defineComponent({
     const table = 'products'
     const optionsCategory = ref([])
     const { post, getById, update, list, uploadImg } = useApi()
-    
     const route = useRoute()
     const { notifyError, notifySuccess } = useNotify()
     const isUpdate = computed(() => route.params.id)
@@ -128,7 +127,6 @@ export default defineComponent({
         notifyError(error.message)
       }
     }
-
     const handleGetProduct = async (id) => {
       try {
         products = await getById(table, id)
@@ -137,7 +135,6 @@ export default defineComponent({
         notifyError(error.message)
       }
     }
-
     return {
       handleSubmit,
       form,
