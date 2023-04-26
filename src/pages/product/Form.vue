@@ -72,7 +72,7 @@
 
 <script>
 import { defineComponent, ref, onMounted, computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 import useApi from 'src/composables/UseApi'
 import useNotify from 'src/composables/UseNotify'
 
@@ -82,7 +82,7 @@ export default defineComponent({
     const table = 'products'
     const optionsCategory = ref([])
     const { post, getById, update, list, uploadImg } = useApi()
-    const router = useRouter()
+    
     const route = useRoute()
     const { notifyError, notifySuccess } = useNotify()
     const isUpdate = computed(() => route.params.id)
