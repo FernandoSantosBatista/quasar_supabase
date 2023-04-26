@@ -123,7 +123,7 @@ export default defineComponent({
           await post(table, form.value)
           notifySuccess('Saved Successfully')
         }
-        router.push({ name: 'products-list' })
+       
       } catch (error) {
         notifyError(error.message)
       }
