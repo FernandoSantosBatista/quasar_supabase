@@ -35,7 +35,6 @@
   </q-page-sticky>
       </div>
       </q-page>
-      {{products}}
 </template>
 
 <script>
